@@ -5,9 +5,22 @@ namespace App\Http\Controllers\Api;
 use App\Models\Agenda;
 use Exception;
 use Illuminate\Http\Request;
+use App\Validator\AgendaValidator;
 
 class AgendaController
 {
+    /**
+     * @var AgendaValidator
+     */
+    protected $agendaValidator;
+
+    public function __construct(
+        AgendaValidator  $agendaValidator
+    ) {
+
+        $this->agendaValidator = $agendaValidator;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +56,27 @@ class AgendaController
      */
     public function store(Request $request)
     {
-        //
+
+        try {
+            $inputs = $this->agendaValidator->validateAgenda($request);
+
+
+            $note = new Agenda();
+            $note->name = $inputs['name'];
+            $note->description = $inputs['description'];
+            $note->status =$inputs['status'];
+            $note->date = date("Y-m-d", strtotime($inputs['date']));
+            // $note->date =$inputs['date'];
+            $note->created_at=date("Y-m-d H:i:s");
+           if($note->save()){
+            return response()->json([
+                'message' => 'Success',
+            ], 200);
+           }
+        } catch (\Exception $e) {
+            // dd($e);
+            abort(response()->json(['message' => 'Something went wrong'], 500));
+        }
     }
 
     /**

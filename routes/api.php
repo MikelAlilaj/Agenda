@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/agendas', [AgendaController::class, 'index']);
+Route::post('/agendas/add-new', [AgendaController::class, 'store']);

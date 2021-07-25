@@ -40,11 +40,10 @@ export default {
     methods: {
         async loadAgenda() {
             try {
-                const { data } = await axios.get("/api/agendas");
+                const { data } = await axios.get(`/api/agendas`);
                 this.agendas = data.agendas;
             } catch (error) {
                 const { data } = error.response;
-                debugger
             }
         },
     },
