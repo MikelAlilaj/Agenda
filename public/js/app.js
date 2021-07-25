@@ -18177,27 +18177,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var _yield$axios$get, data;
+        var _yield$axios$get, data, _data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios.get('/api/agendas');
+                _context.prev = 0;
+                _context.next = 3;
+                return axios.get("/api/agendas");
 
-              case 2:
+              case 3:
                 _yield$axios$get = _context.sent;
                 data = _yield$axios$get.data;
                 _this.agendas = data.agendas;
+                _context.next = 12;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                _data = _context.t0.response.data;
                 debugger;
 
-              case 6:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 8]]);
       }))();
     }
   }

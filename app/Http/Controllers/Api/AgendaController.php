@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Agenda;
+use Exception;
 use Illuminate\Http\Request;
 
 class AgendaController
@@ -14,12 +15,14 @@ class AgendaController
      */
     public function index()
     {
-        $agendas = Agenda::all();
-
-        return response()->json([
-            'agendas'=>$agendas
-        ], 200);
-
+        try {
+            $agendas = Agenda::all();
+            return response()->json([
+                'agendas' => $agendas
+            ], 200);
+        } catch (Exception $e) {
+            abort(response()->json(['message' => 'Internal server error'], 500));
+        }
     }
 
     /**
