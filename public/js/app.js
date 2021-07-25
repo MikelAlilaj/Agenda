@@ -20568,6 +20568,157 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UpdateAgendaComponent.vue?vue&type=script&lang=js":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UpdateAgendaComponent.vue?vue&type=script&lang=js ***!
+  \***************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _vuelidate_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vuelidate/core */ "./node_modules/@vuelidate/core/dist/index.esm.js");
+/* harmony import */ var _vuelidate_validators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vuelidate/validators */ "./node_modules/@vuelidate/validators/dist/index.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      v$: (0,_vuelidate_core__WEBPACK_IMPORTED_MODULE_1__.default)(),
+      agenda: {},
+      form: {
+        name: "",
+        description: "",
+        status: "",
+        date: ""
+      }
+    };
+  },
+  validations: {
+    form: {
+      name: {
+        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_2__.required
+      },
+      description: {
+        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_2__.required
+      },
+      status: {
+        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_2__.required
+      },
+      date: {
+        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_2__.required
+      }
+    }
+  },
+  mounted: function mounted() {
+    var agendaId = this.$route.params.id;
+    this.getAgendaInformation(agendaId);
+  },
+  methods: {
+    getAgendaInformation: function getAgendaInformation(id) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var _yield$axios$get, data, statusText;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios.get("/api/agenda/" + id);
+
+              case 3:
+                _yield$axios$get = _context.sent;
+                data = _yield$axios$get.data;
+                _this.form = {
+                  name: data.agenda.name,
+                  description: data.agenda.description,
+                  status: data.agenda.status,
+                  date: data.agenda.date
+                };
+                _context.next = 12;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                statusText = _context.t0.response.statusText;
+                return _context.abrupt("return", alert(statusText));
+
+              case 12:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 8]]);
+      }))();
+    },
+    onSubmit: function onSubmit() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var id, _yield$window$axios$p, data, statusText;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this2.v$.$validate();
+
+                if (!_this2.v$.form.$error) {
+                  _context2.next = 3;
+                  break;
+                }
+
+                return _context2.abrupt("return");
+
+              case 3:
+                _context2.prev = 3;
+                id = _this2.$route.params.id;
+                _context2.next = 7;
+                return window.axios.patch("/api/update/" + id, _this2.form);
+
+              case 7:
+                _yield$window$axios$p = _context2.sent;
+                data = _yield$window$axios$p.data;
+
+                _this2.$router.push({
+                  path: "../"
+                });
+
+                return _context2.abrupt("return", alert(data.message));
+
+              case 13:
+                _context2.prev = 13;
+                _context2.t0 = _context2["catch"](3);
+                statusText = _context2.t0.response.statusText;
+                return _context2.abrupt("return", alert(statusText));
+
+              case 17:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[3, 13]]);
+      }))();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -20643,9 +20794,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
 /* harmony import */ var _components_AgendasComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/AgendasComponent.vue */ "./resources/js/components/AgendasComponent.vue");
 /* harmony import */ var _components_CreateAgendaComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/CreateAgendaComponent.vue */ "./resources/js/components/CreateAgendaComponent.vue");
+/* harmony import */ var _components_UpdateAgendaComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/UpdateAgendaComponent.vue */ "./resources/js/components/UpdateAgendaComponent.vue");
+
 
 
 
@@ -20657,9 +20810,13 @@ var routes = [{
   path: '/create',
   name: 'CreateAgendaComponent',
   component: _components_CreateAgendaComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default
+}, {
+  path: '/update/:id',
+  name: 'UpdateAgendaComponent',
+  component: _components_UpdateAgendaComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default
 }];
-var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.createRouter)({
-  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.createWebHistory)(),
+var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter)({
+  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createWebHistory)(),
   routes: routes
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -56869,6 +57026,32 @@ _CreateAgendaComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.
 
 /***/ }),
 
+/***/ "./resources/js/components/UpdateAgendaComponent.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/UpdateAgendaComponent.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UpdateAgendaComponent_vue_vue_type_template_id_af480626_bindings_v$_data_agenda_data_form_data_getAgendaInformation_options_onSubmit_options___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UpdateAgendaComponent.vue?vue&type=template&id=af480626&bindings={"v$":"data","agenda":"data","form":"data","getAgendaInformation":"options","onSubmit":"options"} */ "./resources/js/components/UpdateAgendaComponent.vue?vue&type=template&id=af480626&bindings={\"v$\":\"data\",\"agenda\":\"data\",\"form\":\"data\",\"getAgendaInformation\":\"options\",\"onSubmit\":\"options\"}");
+/* harmony import */ var _UpdateAgendaComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UpdateAgendaComponent.vue?vue&type=script&lang=js */ "./resources/js/components/UpdateAgendaComponent.vue?vue&type=script&lang=js");
+
+
+
+_UpdateAgendaComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _UpdateAgendaComponent_vue_vue_type_template_id_af480626_bindings_v$_data_agenda_data_form_data_getAgendaInformation_options_onSubmit_options___WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_UpdateAgendaComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/components/UpdateAgendaComponent.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_UpdateAgendaComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
+
+/***/ }),
+
 /***/ "./resources/js/components/AgendasComponent.vue?vue&type=script&lang=js":
 /*!******************************************************************************!*\
   !*** ./resources/js/components/AgendasComponent.vue?vue&type=script&lang=js ***!
@@ -56897,6 +57080,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CreateAgendaComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CreateAgendaComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CreateAgendaComponent.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CreateAgendaComponent.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/components/UpdateAgendaComponent.vue?vue&type=script&lang=js":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/UpdateAgendaComponent.vue?vue&type=script&lang=js ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UpdateAgendaComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UpdateAgendaComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UpdateAgendaComponent.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UpdateAgendaComponent.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -56945,6 +57144,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CreateAgendaComponent_vue_vue_type_template_id_c1a96c4c_bindings_v$_data_form_data_onSubmit_options___WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CreateAgendaComponent_vue_vue_type_template_id_c1a96c4c_bindings_v$_data_form_data_onSubmit_options___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CreateAgendaComponent.vue?vue&type=template&id=c1a96c4c&bindings={"v$":"data","form":"data","onSubmit":"options"} */ "./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CreateAgendaComponent.vue?vue&type=template&id=c1a96c4c&bindings={\"v$\":\"data\",\"form\":\"data\",\"onSubmit\":\"options\"}");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/UpdateAgendaComponent.vue?vue&type=template&id=af480626&bindings={\"v$\":\"data\",\"agenda\":\"data\",\"form\":\"data\",\"getAgendaInformation\":\"options\",\"onSubmit\":\"options\"}":
+/*!****************************************************************************************************************************************************************************************************!*\
+  !*** ./resources/js/components/UpdateAgendaComponent.vue?vue&type=template&id=af480626&bindings={"v$":"data","agenda":"data","form":"data","getAgendaInformation":"options","onSubmit":"options"} ***!
+  \****************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UpdateAgendaComponent_vue_vue_type_template_id_af480626_bindings_v$_data_agenda_data_form_data_getAgendaInformation_options_onSubmit_options___WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UpdateAgendaComponent_vue_vue_type_template_id_af480626_bindings_v$_data_agenda_data_form_data_getAgendaInformation_options_onSubmit_options___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UpdateAgendaComponent.vue?vue&type=template&id=af480626&bindings={"v$":"data","agenda":"data","form":"data","getAgendaInformation":"options","onSubmit":"options"} */ "./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UpdateAgendaComponent.vue?vue&type=template&id=af480626&bindings={\"v$\":\"data\",\"agenda\":\"data\",\"form\":\"data\",\"getAgendaInformation\":\"options\",\"onSubmit\":\"options\"}");
 
 
 /***/ }),
@@ -57040,6 +57255,152 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 /*!************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CreateAgendaComponent.vue?vue&type=template&id=c1a96c4c&bindings={"v$":"data","form":"data","onSubmit":"options"} ***!
   \************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+const _hoisted_1 = { class: "col-md-6" }
+const _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Go Back")
+const _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1 /* HOISTED */)
+const _hoisted_4 = { class: "col-md-6" }
+const _hoisted_5 = { class: "form-group" }
+const _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "Name", -1 /* HOISTED */)
+const _hoisted_7 = {
+  key: 0,
+  class: "text-danger"
+}
+const _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1 /* HOISTED */)
+const _hoisted_9 = { class: "form-group" }
+const _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "Description", -1 /* HOISTED */)
+const _hoisted_11 = {
+  key: 0,
+  class: "text-danger"
+}
+const _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1 /* HOISTED */)
+const _hoisted_13 = { class: "form-group" }
+const _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "Status", -1 /* HOISTED */)
+const _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", { value: "" }, "Select Status", -1 /* HOISTED */)
+const _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", { value: "1" }, "Active", -1 /* HOISTED */)
+const _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", { value: "2" }, "Inactive", -1 /* HOISTED */)
+const _hoisted_18 = {
+  key: 0,
+  class: "text-danger"
+}
+const _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1 /* HOISTED */)
+const _hoisted_20 = { class: "form-group" }
+const _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "Date:", -1 /* HOISTED */)
+const _hoisted_22 = {
+  key: 0,
+  class: "text-danger"
+}
+const _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1 /* HOISTED */)
+const _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", { class: "col-md-12" }, [
+  /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    class: "btn btn-primary",
+    type: "submit"
+  })
+], -1 /* HOISTED */)
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link")
+
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [
+      (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+        to: './',
+        class: "btn btn-primary home-buttons"
+      }, {
+        default: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(() => [
+          _hoisted_2
+        ]),
+        _: 1 /* STABLE */
+      }, 8 /* PROPS */, ["to"])
+    ]),
+    _hoisted_3,
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [
+      (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
+        onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)((...args) => ($options.onSubmit && $options.onSubmit(...args)), ["prevent"]))
+      }, [
+        (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [
+          (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [
+            _hoisted_6,
+            (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+              "onUpdate:modelValue": _cache[1] || (_cache[1] = $event => ($data.form.name = $event)),
+              type: "text",
+              class: "form-control"
+            }, null, 512 /* NEED_PATCH */), [
+              [vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.name]
+            ]),
+            ($data.v$.form.name.$error)
+              ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_7, " Required "))
+              : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true),
+            _hoisted_8
+          ]),
+          (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [
+            _hoisted_10,
+            (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
+              "onUpdate:modelValue": _cache[2] || (_cache[2] = $event => ($data.form.description = $event)),
+              class: "form-control",
+              rows: "3"
+            }, null, 512 /* NEED_PATCH */), [
+              [vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.description]
+            ]),
+            ($data.v$.form.description.$error)
+              ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_11, " Required "))
+              : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true),
+            _hoisted_12
+          ]),
+          (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [
+            _hoisted_14,
+            (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
+              "onUpdate:modelValue": _cache[3] || (_cache[3] = $event => ($data.form.status = $event)),
+              class: "form-control"
+            }, [
+              _hoisted_15,
+              _hoisted_16,
+              _hoisted_17
+            ], 512 /* NEED_PATCH */), [
+              [vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.form.status]
+            ]),
+            ($data.v$.form.status.$error)
+              ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_18, " Required "))
+              : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true),
+            _hoisted_19
+          ]),
+          (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [
+            _hoisted_21,
+            (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+              "onUpdate:modelValue": _cache[4] || (_cache[4] = $event => ($data.form.date = $event)),
+              type: "date",
+              class: "form-control",
+              "data-date-format": "yy/mm/dd"
+            }, null, 512 /* NEED_PATCH */), [
+              [vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.date]
+            ]),
+            ($data.v$.form.date.$error)
+              ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_22, " Required"))
+              : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true),
+            _hoisted_23
+          ])
+        ]),
+        _hoisted_24
+      ], 32 /* HYDRATE_EVENTS */)
+    ])
+  ], 64 /* STABLE_FRAGMENT */))
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UpdateAgendaComponent.vue?vue&type=template&id=af480626&bindings={\"v$\":\"data\",\"agenda\":\"data\",\"form\":\"data\",\"getAgendaInformation\":\"options\",\"onSubmit\":\"options\"}":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UpdateAgendaComponent.vue?vue&type=template&id=af480626&bindings={"v$":"data","agenda":"data","form":"data","getAgendaInformation":"options","onSubmit":"options"} ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

@@ -6,6 +6,7 @@ use App\Models\Agenda;
 use Exception;
 use Illuminate\Http\Request;
 use App\Validator\AgendaValidator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AgendaController
 {
@@ -56,23 +57,19 @@ class AgendaController
      */
     public function store(Request $request)
     {
-
         try {
             $inputs = $this->agendaValidator->validateAgenda($request);
-
-
-            $note = new Agenda();
-            $note->name = $inputs['name'];
-            $note->description = $inputs['description'];
-            $note->status =$inputs['status'];
-            $note->date = date("Y-m-d", strtotime($inputs['date']));
-            // $note->date =$inputs['date'];
-            $note->created_at=date("Y-m-d H:i:s");
-           if($note->save()){
-            return response()->json([
-                'message' => 'Success',
-            ], 200);
-           }
+            $agenda = new Agenda();
+            $agenda->name = $inputs['name'];
+            $agenda->description = $inputs['description'];
+            $agenda->status = $inputs['status'];
+            $agenda->date = date("Y-m-d", strtotime($inputs['date']));
+            $agenda->created_at = date("Y-m-d H:i:s");
+            if ($agenda->save()) {
+                return response()->json([
+                    'message' => 'Success',
+                ], 200);
+            }
         } catch (\Exception $e) {
             // dd($e);
             abort(response()->json(['message' => 'Something went wrong'], 500));
@@ -87,7 +84,19 @@ class AgendaController
      */
     public function show($id)
     {
-        //
+        try {
+            $agenda = Agenda::find($id);
+            if (!$agenda)  throw new ModelNotFoundException('Agenda not found');
+            return response()->json([
+                'agenda' => $agenda
+            ], 200);
+        } catch (ModelNotFoundException $e) {
+            abort(
+                response()->json(['message' => $e->getMessage()], 404)
+            );
+        } catch (Exception $e) {
+            abort(response()->json(['message' => 'Internal server error'], 500));
+        }
     }
 
     /**
@@ -110,7 +119,26 @@ class AgendaController
      */
     public function update(Request $request, $id)
     {
-        //
+
+
+        try {
+            $inputs = $this->agendaValidator->validateAgenda($request);
+            $agenda = Agenda::findOrFail($id);
+            $agenda->name = $inputs['name'];
+            $agenda->description = $inputs['description'];
+            $agenda->status = $inputs['status'];
+            $agenda->date = date("Y-m-d", strtotime($inputs['date']));
+            $agenda->created_at = date("Y-m-d H:i:s");
+            if ($agenda->save()) {
+                return response()->json([
+                    'message' => 'Success',
+                ], 200);
+            }
+
+        } catch (Exception $e) {
+            // dd($e);
+            abort(response()->json(['message' => $e], 500));
+        }
     }
 
     /**
