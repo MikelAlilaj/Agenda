@@ -149,6 +149,20 @@ class AgendaController
      */
     public function destroy($id)
     {
-        //
+        try {
+            $agenda = Agenda::find($id);
+            if (!$agenda)  throw new ModelNotFoundException('Agenda not found');
+            if ($agenda->delete()) {
+                return response()->json([
+                    'message' => 'Success',
+                ], 200);
+            }
+        } catch (ModelNotFoundException $e) {
+            abort(
+                response()->json(['message' => $e->getMessage()], 404)
+            );
+        } catch (Exception $e) {
+            abort(response()->json(['message' => 'Internal server error'], 500));
+        }
     }
 }

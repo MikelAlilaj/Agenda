@@ -23,3 +23,4 @@ Route::get('/agendas', [AgendaController::class, 'index']);
 Route::post('/agendas/add-new', [AgendaController::class, 'store']);
 Route::get('/agenda/{id}', [AgendaController::class, 'show']);
 Route::patch('/update/{id}', [AgendaController::class, 'update']);
+Route::delete('/delete/{id}', [AgendaController::class, 'destroy']);

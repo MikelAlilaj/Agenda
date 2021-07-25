@@ -10,6 +10,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Date</th>
                 <th scope="col">Status</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,18 @@
                 <td>
                     <span v-if="agenda.status == 1">Active</span>
                     <span v-else>Inactive</span>
+                </td>
+                <td>
+                    <router-link
+                        :to="'/update/' + agenda.id"
+                        class="btn btn-primary"
+                        >Update</router-link
+                    >
+                    <a
+                        @click="deleteAgenda(agenda.id)"
+                        class="btn btn-danger ml-2"
+                        >Delete</a
+                    >
                 </td>
             </tr>
         </tbody>
@@ -35,16 +48,29 @@ export default {
         };
     },
     mounted() {
-        this.loadAgenda();
+        this.loadAgendas();
     },
     methods: {
-        async loadAgenda() {
+        async loadAgendas() {
             try {
                 const { data } = await axios.get(`/api/agendas`);
                 this.agendas = data.agendas;
             } catch (error) {
-                const { data } = error.response;
+                const { statusText } = error.response;
+                return alert(statusText);
             }
+        },
+
+        async deleteAgenda(id) {
+            if (confirm("If you click ok this will be delete"))
+                try {
+                    const { data } = await axios.delete(`api/delete/` + id);
+                    this.loadAgendas();
+                    return alert(data.message);
+                } catch (error) {
+                    const { statusText } = error.response;
+                    return alert(statusText);
+                }
         },
     },
 };
