@@ -134,7 +134,6 @@ class AgendaController
                     'message' => 'Success',
                 ], 200);
             }
-
         } catch (Exception $e) {
             // dd($e);
             abort(response()->json(['message' => $e], 500));
@@ -161,6 +160,34 @@ class AgendaController
             abort(
                 response()->json(['message' => $e->getMessage()], 404)
             );
+        } catch (Exception $e) {
+            abort(response()->json(['message' => 'Internal server error'], 500));
+        }
+    }
+
+    public function import(Request $request)
+    {
+        try {
+            $inputs = $this->agendaValidator->validateImportAgenda($request);
+
+            if(empty($inputs)){
+                return response()->json([
+                    'message' => 'Something went wrong',
+                ], 500);
+              }
+            foreach ($inputs as $input) {
+
+                $agenda = new Agenda();
+                $agenda->name = $input['name'];
+                $agenda->description = $input['description'];
+                $agenda->status = $input['status'];
+                $agenda->date = date("Y-m-d", strtotime($input['date']));
+                $agenda->created_at = date("Y-m-d H:i:s");
+                $agenda->save();
+            }
+            return response()->json([
+                'message' => 'Success',
+            ], 200);
         } catch (Exception $e) {
             abort(response()->json(['message' => 'Internal server error'], 500));
         }

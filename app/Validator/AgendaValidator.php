@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class AgendaValidator
 {
     /**
-     * Validate Partner Information Schema
+     * Validate agenda Information Schema
      *
      * @param $request
      * @return response
@@ -20,6 +20,24 @@ class AgendaValidator
                 'description' => 'required',
                 'status' => 'required|integer',
                 'date' => 'required|date',
+            ]
+        );
+    }
+
+    /**
+     * Validate Partner Information Schema
+     *
+     * @param $request
+     * @return response
+     */
+    public function validateImportAgenda(Request $request)
+    {
+        return $request->validate(
+            [
+                '*.name' => 'required',
+                '*.description' => 'required',
+                '*.status' => 'required|integer',
+                '*.date' => 'required|date',
             ]
         );
     }

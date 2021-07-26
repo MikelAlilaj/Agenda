@@ -1,6 +1,6 @@
 <template>
     <div class="col-md-6">
-        <router-link :to="'./'" class="btn btn-primary home-buttons"
+        <router-link :to="'../'" class="btn btn-primary home-buttons"
             >Go Back</router-link
         >
     </div>
