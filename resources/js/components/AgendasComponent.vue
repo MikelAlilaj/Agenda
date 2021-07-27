@@ -5,6 +5,9 @@
                 >Add new</router-link
             >
         </div>
+        <div style="float: left; width: 200px">
+            <a @click="exportDataFile()" class="btn btn-success ml-2">Export</a>
+        </div>
         <div
             class="large-12 medium-12 small-12 cell"
             style="float: left; width: 100px"
@@ -58,10 +61,12 @@
 </template>
 
 <script>
+import FileSaver from "file-saver";
 export default {
     data() {
         return {
             agendas: [],
+            agendasExport: [],
         };
     },
 
@@ -130,6 +135,20 @@ export default {
             } catch (error) {
                 const { statusText } = error.response;
                 this.$refs.file.value = null;
+                return alert(statusText);
+            }
+        },
+
+        async exportDataFile() {
+            try {
+                const { data } = await axios.get(`/api/export`);
+                this.agendasArray = data.agendasArray;
+                var agendaFile = new Blob([JSON.stringify(this.agendasArray)], {
+                    type: "text/plain;charset=utf-8",
+                });
+                FileSaver.saveAs(agendaFile, "agendas.json");
+            } catch (error) {
+                const { statusText } = error.response;
                 return alert(statusText);
             }
         },

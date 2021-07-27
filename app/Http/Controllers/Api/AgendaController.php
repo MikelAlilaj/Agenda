@@ -192,4 +192,16 @@ class AgendaController
             abort(response()->json(['message' => 'Internal server error'], 500));
         }
     }
+
+    public function export(Request $request)
+    {
+        try {
+         $agendas = Agenda::all()->toArray();
+         return response()->json([
+            'agendasArray' => $agendas
+        ], 200);
+        } catch (Exception $e) {
+            abort(response()->json(['message' => 'Internal server error'], 500));
+        }
+    }
 }

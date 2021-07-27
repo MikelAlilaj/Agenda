@@ -20408,16 +20408,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
+/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_1__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      agendas: []
+      agendas: [],
+      agendasExport: []
     };
   },
   mounted: function mounted() {
@@ -20561,6 +20565,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee3, null, [[0, 10]]);
+      }))();
+    },
+    exportDataFile: function exportDataFile() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var _yield$axios$get2, data, agendaFile, statusText;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return axios.get("/api/export");
+
+              case 3:
+                _yield$axios$get2 = _context4.sent;
+                data = _yield$axios$get2.data;
+                _this5.agendasArray = data.agendasArray;
+                agendaFile = new Blob([JSON.stringify(_this5.agendasArray)], {
+                  type: "text/plain;charset=utf-8"
+                });
+                file_saver__WEBPACK_IMPORTED_MODULE_1___default().saveAs(agendaFile, "agendas.json");
+                _context4.next = 14;
+                break;
+
+              case 10:
+                _context4.prev = 10;
+                _context4.t0 = _context4["catch"](0);
+                statusText = _context4.t0.response.statusText;
+                return _context4.abrupt("return", alert(statusText));
+
+              case 14:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 10]]);
       }))();
     }
   }
@@ -25366,6 +25409,21 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter)({
 })));
 //# sourceMappingURL=bootstrap.js.map
 
+
+/***/ }),
+
+/***/ "./node_modules/file-saver/dist/FileSaver.min.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/file-saver/dist/FileSaver.min.js ***!
+  \*******************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(a,b){if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (b),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else {}})(this,function(){"use strict";function b(a,b){return"undefined"==typeof b?b={autoBom:!1}:"object"!=typeof b&&(console.warn("Deprecated: Expected third argument to be a object"),b={autoBom:!b}),b.autoBom&&/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(a.type)?new Blob(["\uFEFF",a],{type:a.type}):a}function c(a,b,c){var d=new XMLHttpRequest;d.open("GET",a),d.responseType="blob",d.onload=function(){g(d.response,b,c)},d.onerror=function(){console.error("could not download file")},d.send()}function d(a){var b=new XMLHttpRequest;b.open("HEAD",a,!1);try{b.send()}catch(a){}return 200<=b.status&&299>=b.status}function e(a){try{a.dispatchEvent(new MouseEvent("click"))}catch(c){var b=document.createEvent("MouseEvents");b.initMouseEvent("click",!0,!0,window,0,0,0,80,20,!1,!1,!1,!1,0,null),a.dispatchEvent(b)}}var f="object"==typeof window&&window.window===window?window:"object"==typeof self&&self.self===self?self:"object"==typeof __webpack_require__.g&&__webpack_require__.g.global===__webpack_require__.g?__webpack_require__.g:void 0,a=f.navigator&&/Macintosh/.test(navigator.userAgent)&&/AppleWebKit/.test(navigator.userAgent)&&!/Safari/.test(navigator.userAgent),g=f.saveAs||("object"!=typeof window||window!==f?function(){}:"download"in HTMLAnchorElement.prototype&&!a?function(b,g,h){var i=f.URL||f.webkitURL,j=document.createElement("a");g=g||b.name||"download",j.download=g,j.rel="noopener","string"==typeof b?(j.href=b,j.origin===location.origin?e(j):d(j.href)?c(b,g,h):e(j,j.target="_blank")):(j.href=i.createObjectURL(b),setTimeout(function(){i.revokeObjectURL(j.href)},4E4),setTimeout(function(){e(j)},0))}:"msSaveOrOpenBlob"in navigator?function(f,g,h){if(g=g||f.name||"download","string"!=typeof f)navigator.msSaveOrOpenBlob(b(f,h),g);else if(d(f))c(f,g,h);else{var i=document.createElement("a");i.href=f,i.target="_blank",setTimeout(function(){e(i)})}}:function(b,d,e,g){if(g=g||open("","_blank"),g&&(g.document.title=g.document.body.innerText="downloading..."),"string"==typeof b)return c(b,d,e);var h="application/octet-stream"===b.type,i=/constructor/i.test(f.HTMLElement)||f.safari,j=/CriOS\/[\d]+/.test(navigator.userAgent);if((j||h&&i||a)&&"undefined"!=typeof FileReader){var k=new FileReader;k.onloadend=function(){var a=k.result;a=j?a:a.replace(/^data:[^;]*;/,"data:attachment/file;"),g?g.location.href=a:location=a,g=null},k.readAsDataURL(b)}else{var l=f.URL||f.webkitURL,m=l.createObjectURL(b);g?g.location=m:location.href=m,g=null,setTimeout(function(){l.revokeObjectURL(m)},4E4)}});f.saveAs=g.saveAs=g, true&&(module.exports=g)});
+
+//# sourceMappingURL=FileSaver.min.js.map
 
 /***/ }),
 
@@ -57066,12 +57124,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _AgendasComponent_vue_vue_type_template_id_3094c241_bindings_agendas_data_loadAgendas_options_deleteAgenda_options_onFile_options_readFile_options_sendDataFile_options___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AgendasComponent.vue?vue&type=template&id=3094c241&bindings={"agendas":"data","loadAgendas":"options","deleteAgenda":"options","onFile":"options","readFile":"options","sendDataFile":"options"} */ "./resources/js/components/AgendasComponent.vue?vue&type=template&id=3094c241&bindings={\"agendas\":\"data\",\"loadAgendas\":\"options\",\"deleteAgenda\":\"options\",\"onFile\":\"options\",\"readFile\":\"options\",\"sendDataFile\":\"options\"}");
+/* harmony import */ var _AgendasComponent_vue_vue_type_template_id_3094c241_bindings_agendas_data_agendasExport_data_loadAgendas_options_deleteAgenda_options_onFile_options_readFile_options_sendDataFile_options_exportDataFile_options___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AgendasComponent.vue?vue&type=template&id=3094c241&bindings={"agendas":"data","agendasExport":"data","loadAgendas":"options","deleteAgenda":"options","onFile":"options","readFile":"options","sendDataFile":"options","exportDataFile":"options"} */ "./resources/js/components/AgendasComponent.vue?vue&type=template&id=3094c241&bindings={\"agendas\":\"data\",\"agendasExport\":\"data\",\"loadAgendas\":\"options\",\"deleteAgenda\":\"options\",\"onFile\":\"options\",\"readFile\":\"options\",\"sendDataFile\":\"options\",\"exportDataFile\":\"options\"}");
 /* harmony import */ var _AgendasComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AgendasComponent.vue?vue&type=script&lang=js */ "./resources/js/components/AgendasComponent.vue?vue&type=script&lang=js");
 
 
 
-_AgendasComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _AgendasComponent_vue_vue_type_template_id_3094c241_bindings_agendas_data_loadAgendas_options_deleteAgenda_options_onFile_options_readFile_options_sendDataFile_options___WEBPACK_IMPORTED_MODULE_0__.render
+_AgendasComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _AgendasComponent_vue_vue_type_template_id_3094c241_bindings_agendas_data_agendasExport_data_loadAgendas_options_deleteAgenda_options_onFile_options_readFile_options_sendDataFile_options_exportDataFile_options___WEBPACK_IMPORTED_MODULE_0__.render
 /* hot reload */
 if (false) {}
 
@@ -57205,18 +57263,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/AgendasComponent.vue?vue&type=template&id=3094c241&bindings={\"agendas\":\"data\",\"loadAgendas\":\"options\",\"deleteAgenda\":\"options\",\"onFile\":\"options\",\"readFile\":\"options\",\"sendDataFile\":\"options\"}":
-/*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/components/AgendasComponent.vue?vue&type=template&id=3094c241&bindings={"agendas":"data","loadAgendas":"options","deleteAgenda":"options","onFile":"options","readFile":"options","sendDataFile":"options"} ***!
-  \**********************************************************************************************************************************************************************************************************************************/
+/***/ "./resources/js/components/AgendasComponent.vue?vue&type=template&id=3094c241&bindings={\"agendas\":\"data\",\"agendasExport\":\"data\",\"loadAgendas\":\"options\",\"deleteAgenda\":\"options\",\"onFile\":\"options\",\"readFile\":\"options\",\"sendDataFile\":\"options\",\"exportDataFile\":\"options\"}":
+/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./resources/js/components/AgendasComponent.vue?vue&type=template&id=3094c241&bindings={"agendas":"data","agendasExport":"data","loadAgendas":"options","deleteAgenda":"options","onFile":"options","readFile":"options","sendDataFile":"options","exportDataFile":"options"} ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AgendasComponent_vue_vue_type_template_id_3094c241_bindings_agendas_data_loadAgendas_options_deleteAgenda_options_onFile_options_readFile_options_sendDataFile_options___WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AgendasComponent_vue_vue_type_template_id_3094c241_bindings_agendas_data_agendasExport_data_loadAgendas_options_deleteAgenda_options_onFile_options_readFile_options_sendDataFile_options_exportDataFile_options___WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AgendasComponent_vue_vue_type_template_id_3094c241_bindings_agendas_data_loadAgendas_options_deleteAgenda_options_onFile_options_readFile_options_sendDataFile_options___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./AgendasComponent.vue?vue&type=template&id=3094c241&bindings={"agendas":"data","loadAgendas":"options","deleteAgenda":"options","onFile":"options","readFile":"options","sendDataFile":"options"} */ "./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AgendasComponent.vue?vue&type=template&id=3094c241&bindings={\"agendas\":\"data\",\"loadAgendas\":\"options\",\"deleteAgenda\":\"options\",\"onFile\":\"options\",\"readFile\":\"options\",\"sendDataFile\":\"options\"}");
+/* harmony import */ var _node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AgendasComponent_vue_vue_type_template_id_3094c241_bindings_agendas_data_agendasExport_data_loadAgendas_options_deleteAgenda_options_onFile_options_readFile_options_sendDataFile_options_exportDataFile_options___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./AgendasComponent.vue?vue&type=template&id=3094c241&bindings={"agendas":"data","agendasExport":"data","loadAgendas":"options","deleteAgenda":"options","onFile":"options","readFile":"options","sendDataFile":"options","exportDataFile":"options"} */ "./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AgendasComponent.vue?vue&type=template&id=3094c241&bindings={\"agendas\":\"data\",\"agendasExport\":\"data\",\"loadAgendas\":\"options\",\"deleteAgenda\":\"options\",\"onFile\":\"options\",\"readFile\":\"options\",\"sendDataFile\":\"options\",\"exportDataFile\":\"options\"}");
 
 
 /***/ }),
@@ -57269,10 +57327,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AgendasComponent.vue?vue&type=template&id=3094c241&bindings={\"agendas\":\"data\",\"loadAgendas\":\"options\",\"deleteAgenda\":\"options\",\"onFile\":\"options\",\"readFile\":\"options\",\"sendDataFile\":\"options\"}":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AgendasComponent.vue?vue&type=template&id=3094c241&bindings={"agendas":"data","loadAgendas":"options","deleteAgenda":"options","onFile":"options","readFile":"options","sendDataFile":"options"} ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AgendasComponent.vue?vue&type=template&id=3094c241&bindings={\"agendas\":\"data\",\"agendasExport\":\"data\",\"loadAgendas\":\"options\",\"deleteAgenda\":\"options\",\"onFile\":\"options\",\"readFile\":\"options\",\"sendDataFile\":\"options\",\"exportDataFile\":\"options\"}":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AgendasComponent.vue?vue&type=template&id=3094c241&bindings={"agendas":"data","agendasExport":"data","loadAgendas":"options","deleteAgenda":"options","onFile":"options","readFile":"options","sendDataFile":"options","exportDataFile":"options"} ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -57286,13 +57344,14 @@ __webpack_require__.r(__webpack_exports__);
 const _hoisted_1 = { class: "col-md-12" }
 const _hoisted_2 = { style: {"float":"left","width":"200px"} }
 const _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Add new")
-const _hoisted_4 = {
+const _hoisted_4 = { style: {"float":"left","width":"200px"} }
+const _hoisted_5 = {
   class: "large-12 medium-12 small-12 cell",
   style: {"float":"left","width":"100px"}
 }
-const _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", null, "Import json file", -1 /* HOISTED */)
-const _hoisted_6 = { class: "table" }
-const _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", null, [
+const _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", null, "Import json file", -1 /* HOISTED */)
+const _hoisted_7 = { class: "table" }
+const _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", null, [
   /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [
     /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", { scope: "col" }, "#"),
     /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", { scope: "col" }, "Name"),
@@ -57302,10 +57361,10 @@ const _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)
     /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", { scope: "col" }, "Action")
   ])
 ], -1 /* HOISTED */)
-const _hoisted_8 = { scope: "row" }
-const _hoisted_9 = { key: 0 }
-const _hoisted_10 = { key: 1 }
-const _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Update")
+const _hoisted_9 = { scope: "row" }
+const _hoisted_10 = { key: 0 }
+const _hoisted_11 = { key: 1 }
+const _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Update")
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link")
@@ -57324,29 +57383,35 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, 8 /* PROPS */, ["to"])
       ]),
       (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [
-        _hoisted_5,
+        (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+          onClick: _cache[1] || (_cache[1] = $event => ($options.exportDataFile())),
+          class: "btn btn-success ml-2"
+        }, "Export")
+      ]),
+      (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [
+        _hoisted_6,
         (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
           type: "file",
           accept: "application/JSON",
-          onChange: _cache[1] || (_cache[1] = (...args) => ($options.onFile && $options.onFile(...args))),
+          onChange: _cache[2] || (_cache[2] = (...args) => ($options.onFile && $options.onFile(...args))),
           class: "inputFile",
           ref: "file"
         }, null, 544 /* HYDRATE_EVENTS, NEED_PATCH */)
       ])
     ]),
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_6, [
-      _hoisted_7,
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_7, [
+      _hoisted_8,
       (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tbody", null, [
         ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.agendas, (agenda, index) => {
           return ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", null, [
-            (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(++index), 1 /* TEXT */),
+            (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(++index), 1 /* TEXT */),
             (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(agenda.name), 1 /* TEXT */),
             (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(agenda.description), 1 /* TEXT */),
             (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(agenda.date), 1 /* TEXT */),
             (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [
               (agenda.status == 1)
-                ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_9, "Active"))
-                : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_10, "Inactive"))
+                ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_10, "Active"))
+                : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_11, "Inactive"))
             ]),
             (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [
               (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
@@ -57354,7 +57419,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 class: "btn btn-primary"
               }, {
                 default: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(() => [
-                  _hoisted_11
+                  _hoisted_12
                 ]),
                 _: 2 /* DYNAMIC */
               }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["to"]),
